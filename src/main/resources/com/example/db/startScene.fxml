@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.db.StartSceneController">
+   <children>
+      <TableView fx:id="table_id" layoutX="131.0" layoutY="92.0" prefHeight="200.0" prefWidth="375.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="100" text="name" />
+          <TableColumn fx:id="countColumn" prefWidth="120" text="count" />
+            <TableColumn fx:id="themeColumn" prefWidth="140" text="theme" />
+        </columns>
+      </TableView>
+      <TextField fx:id="nameField" layoutX="47.0" layoutY="27.0" />
+      <TextField fx:id="countField" layoutX="226.0" layoutY="27.0" />
+      <TextField fx:id="themeField" layoutX="405.0" layoutY="27.0" />
+      <Button fx:id="button_id" layoutX="528.0" layoutY="79.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="button2" layoutX="528.0" layoutY="298.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="buttonClear" layoutX="79.0" layoutY="298.0" mnemonicParsing="false" text="Button" />
+      <Label fx:id="labelSearch" layoutX="131.0" layoutY="62.0" prefHeight="17.0" prefWidth="103.0" text="Search" textFill="#be9191">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textField" layoutX="183.0" layoutY="60.0" prefHeight="25.0" prefWidth="322.0" promptText="Text..." />
+   </children>
+</AnchorPane>
