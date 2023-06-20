@@ -33,8 +33,8 @@
          <center>
             <TableView fx:id="table" onMouseClicked="#handleRowSelection" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="A" prefWidth="75.33331298828125" text="A" />
-                <TableColumn fx:id="B" prefWidth="76.00003051757812" text="B" />
+                  <TableColumn fx:id="A" prefWidth="75.0" text="A" />
+                  <TableColumn fx:id="B" prefWidth="75.0" text="B" />
                   <TableColumn fx:id="C" prefWidth="75.0" text="C" />
                   <TableColumn fx:id="D" prefWidth="75.0" text="D" />
                   <TableColumn fx:id="E" prefWidth="75.0" text="E" />
@@ -43,6 +43,9 @@
                   <TableColumn fx:id="H" prefWidth="75.0" text="H" />
                   <TableColumn fx:id="I" prefWidth="75.0" text="I" />
                   <TableColumn fx:id="J" prefWidth="75.0" text="J" />
+                  <TableColumn fx:id="K" prefWidth="75.0" text="K" />
+                  <TableColumn fx:id="L" prefWidth="75.0" text="L" />
+                  <TableColumn prefWidth="75.0" text="Column X" />
               </columns>
             </TableView>
          </center>
@@ -69,11 +72,11 @@
                               <Insets left="10.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Связанное">
+                        <CheckBox mnemonicParsing="false" onAction="#joinMode" prefHeight="17.0" prefWidth="70.0" text="Связать" textFill="#000cff">
                            <HBox.margin>
-                              <Insets left="90.0" top="5.0" />
+                              <Insets left="70.0" top="10.0" />
                            </HBox.margin>
-                        </Button>
+                        </CheckBox>
                      </children></HBox>
                </center>
                <right>

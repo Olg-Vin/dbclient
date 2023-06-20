@@ -16,13 +16,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -35,8 +37,11 @@ public class MyScene implements Initializable {
     @FXML public TableColumn<Object, String> E; @FXML public TableColumn<Object, String> F;
     @FXML public TableColumn<Object, String> G; @FXML public TableColumn<Object, String> H;
     @FXML public TableColumn<Object, String> I;@FXML public TableColumn<Object, String> J;
+    List<TableColumn<Object, String>> list = new ArrayList<>();
+
     @FXML public Button buttonEmployee; @FXML public Button buttonHall;
              static ObservableList<Object> data = FXCollections.observableArrayList();
+
     @FXML
     public TextField textField;
     @FXML
@@ -54,6 +59,7 @@ public class MyScene implements Initializable {
 
 //    public Object selectedItem = table.getSelectionModel().getSelectedItem();
     public static boolean buttonFlag;
+
     DBHandler dbHandler = new DBHandler();
     DBQuery dbQuery = new DBQuery();
     private int flag;
@@ -61,17 +67,24 @@ public class MyScene implements Initializable {
     public void openAddScene(ActionEvent actionEvent) throws IOException {
         buttonFlag = false;
         switch (flag) {
-            case 1: System.out.println("1");break;
+            case 1: addScene(actionEvent, "addHall.fxml");break;
             case 2: addScene(actionEvent, "addEmployee.fxml");break;
+            case 3: addScene(actionEvent, "addExcursion.fxml");break;
+            case 4: addScene(actionEvent, "addFond.fxml");break;
+            case 5: addScene(actionEvent, "addMuseumItem.fxml");break;
+            case 6: addScene(actionEvent, "addSupport.fxml");break;
         }
     }
     @FXML
     public void openEditScene(ActionEvent actionEvent) throws IOException {
-//        Object selectedItem = table.getSelectionModel().getSelectedItem();
         buttonFlag = true;
         switch (flag) {
-            case 1: System.out.println("1");break;
+            case 1: addScene(actionEvent, "addHall.fxml");break;
             case 2: addScene(actionEvent, "addEmployee.fxml");break;
+            case 3: addScene(actionEvent, "addExcursion.fxml");break;
+            case 4: addScene(actionEvent, "addFond.fxml");break;
+            case 5: addScene(actionEvent, "addMuseumItem.fxml");break;
+            case 6: addScene(actionEvent, "addSupport.fxml");break;
         }
     }
     private void addScene(ActionEvent actionEvent, String sceneSource) throws IOException {
@@ -94,7 +107,7 @@ public class MyScene implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        createColumns();
         buttonHall.setOnAction(actionEvent -> {
             setFlag(1);
             addDataFromHall();
@@ -123,12 +136,32 @@ public class MyScene implements Initializable {
             Object selectedItem = table.getSelectionModel().getSelectedItem();
             table.getItems().remove(selectedItem);
             System.out.println(selectedItem.toString());
+//            todo
             try {
                 switch (flag) {
-                    case 1 -> System.out.println("1");
+                    case 1 -> {
+                        Hall hall = (Hall) selectedItem;
+                        dbQuery.deleteInfo("hall", hall.getHall_name());
+                    }
                     case 2 -> {
                         Employee employee = (Employee) selectedItem;
                         dbQuery.deleteInfo("employee", employee.getPassport());
+                    }
+                    case 3 -> {
+                        Excursion excursion = (Excursion) selectedItem;
+                        dbQuery.deleteInfo("excursion", excursion.getExcursion_name());
+                    }
+                    case 4 -> {
+                        Fond fond = (Fond) selectedItem;
+                        dbQuery.deleteInfo("fond", fond.getFond_name());
+                    }
+                    case 5 -> {
+                        MuseumItem museumItem = (MuseumItem) selectedItem;
+                        dbQuery.deleteInfo("museum_item", String.valueOf(museumItem.getInventory_number()));
+                    }
+                    case 6 -> {
+                        Support support = (Support) selectedItem;
+                        dbQuery.deleteInfo("support", String.valueOf(support.getSupport_id()));
                     }
                 }
             } catch (SQLException e) {
@@ -175,9 +208,10 @@ public class MyScene implements Initializable {
         ResultSet rs = dbQuery.getInfo(query);
         try {
             while (rs.next()){
-                MuseumItem museumItem = new MuseumItem(rs.getInt(1), rs.getString(2),
-                        rs.getString(3),rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7),rs.getString(8));
+                MuseumItem museumItem = new MuseumItem(rs.getInt(1), rs.getString(5),
+                        rs.getString(7),rs.getString(4), rs.getString(8),
+                        rs.getString(2), rs.getString(3),rs.getString(6));
+                System.out.println("rs.next = " + museumItem);
                 data.add(museumItem);
             }
             MuseumItem museumItem = new MuseumItem();
@@ -196,7 +230,7 @@ public class MyScene implements Initializable {
         try {
             while (rs.next()){
                 Fond fond = new Fond(rs.getString(1),
-                        rs.getDate(2));
+                        rs.getString(2));
                 data.add(fond);
             }
             Fond fond = new Fond();
@@ -280,15 +314,43 @@ public class MyScene implements Initializable {
         I.setCellValueFactory(new PropertyValueFactory<>(c.length <= 8 ? null:c[8]));
         J.setCellValueFactory(new PropertyValueFactory<>(c.length <= 9 ? null:c[9]));
     }
+    private void createColumns(String table) throws SQLException {
+        List<String > columnsName = dbQuery.createColumns(table);
 
+    }
 
+// выбираем строку и передаём объект в нужный класс для работы
     public void handleRowSelection(MouseEvent mouseEvent) {
         System.out.println("row was choose");
-        Object selectedEmployee = table.getSelectionModel().getSelectedItem();
-        if (selectedEmployee != null) {
-            AddEmployee addEmployee = new AddEmployee((Employee) selectedEmployee);
-            // Вызов методов в классе AddEmployee или открытие нового окна
+        Object selected = table.getSelectionModel().getSelectedItem();
+        System.out.println("selected obj = " + selected.toString());
+        if (selected != null) {
+            switch (flag){
+                case 1: AddHall addHall = new AddHall((Hall) selected); break;
+                case 2: AddEmployee addEmployee = new AddEmployee((Employee) selected); break;
+                case 3: AddExcursion addExcursion = new AddExcursion((Excursion) selected); break;
+                case 4: AddFond addFond = new AddFond((Fond) selected); break;
+                case 5: AddMuseumItem museumItem = new AddMuseumItem((MuseumItem) selected);
+                    System.out.println("choose row = " + selected);break;
+                case 6: AddSupport addSupport = new AddSupport((Support) selected); break;
+            }
         }
     }
+    private static List<Integer> tables = new ArrayList<>();
+
+    public void joinMode(ActionEvent actionEvent) {
+
+    }
+    public static ObservableList<TableColumn<Object, String>> columns = FXCollections.observableArrayList();
+    private void createColumns() {
+        for (int i = 0; i < 20; i++) {
+            TableColumn<Object, String> column = new TableColumn<>("Column " + (i + 1));
+            column.setCellValueFactory(new PropertyValueFactory<>(null));
+            columns.add(column);
+        }
+        table.getColumns().addAll(columns);
+    }
 }
+
+
 

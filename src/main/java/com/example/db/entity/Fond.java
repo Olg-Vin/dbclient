@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class Fond extends Entity{
     private String fond_name;
-    private Date founding_date;
+    private String founding_date;
 
-    public Fond(String fond_name, Date founding_date) {
+    public Fond(String fond_name, String founding_date) {
         this.fond_name = fond_name;
         this.founding_date = founding_date;
     }
@@ -24,11 +24,11 @@ public class Fond extends Entity{
         this.fond_name = fond_name;
     }
 
-    public Date getFounding_date() {
+    public String  getFounding_date() {
         return founding_date;
     }
 
-    public void setFounding_date(Date founding_date) {
+    public void setFounding_date(String founding_date) {
         this.founding_date = founding_date;
     }
 

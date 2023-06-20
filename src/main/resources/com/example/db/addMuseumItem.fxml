@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.db.controller.AddMuseumItem"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.db.controller.AddMuseumItem">
+    <children>
+        <Pane fx:id="popupEmployee" prefHeight="406.0" prefWidth="350.0">
+            <children>
+                <VBox layoutY="-4.0" prefHeight="413.0" prefWidth="350.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10;">
+                    <children>
+                        <HBox prefHeight="35.0" prefWidth="350.0">
+                            <children>
+                                <TextField fx:id="inventoryNumber" editable="false">
+                                    <HBox.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <Label text="Инвентарный номер" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="35.0" prefWidth="350.0">
+                            <children>
+                                <TextField fx:id="name">
+                                    <HBox.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <Label text="Название" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="35.0" prefWidth="350.0">
+                            <children>
+                        <ComboBox fx:id="safely" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                                <Label text="Степень сохранности">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin></Label>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="35.0" prefWidth="350.0">
+                            <children>
+                        <TextField fx:id="discovery">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                                <Label prefWidth="104.0" text="Дата находки" wrapText="true">
+                                    <HBox.margin>
+                                        <Insets left="20.0" />
+                                    </HBox.margin></Label>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="35.0" prefWidth="350.0">
+                            <children>
+                                <TextField fx:id="author">
+                                    <HBox.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <Label text="Автор" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="35.0" prefWidth="350.0">
+                            <children>
+                                <TextField fx:id="story" prefHeight="25.0" prefWidth="148.0">
+                                    <HBox.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <Label text="История" wrapText="true" />
+                            </children>
+                        </HBox>
+                  <HBox layoutX="10.0" layoutY="257.0" prefHeight="35.0" prefWidth="350.0">
+                     <children>
+                        <TextField fx:id="create" prefHeight="25.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label text="Дата создания" wrapText="true" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="211.0" prefHeight="35.0" prefWidth="350.0">
+                      <children>
+                          <ComboBox fx:id="fondsEm" prefWidth="150.0">
+                              <HBox.margin>
+                                  <Insets left="20.0" />
+                              </HBox.margin></ComboBox>
+                          <Label text="Название фонда">
+                              <HBox.margin>
+                                  <Insets left="20.0" />
+                              </HBox.margin></Label>
+                      </children>
+                  </HBox>
+                        <HBox prefHeight="45.0" prefWidth="350.0">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <Button fx:id="gotAddButton" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Добавить">
+                                    <HBox.margin>
+                                        <Insets left="140.0" top="5.0" />
+                                    </HBox.margin>
+                                </Button>
+                                <Button fx:id="gotEditButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Изменить" visible="false">
+                                    <HBox.margin>
+                                        <Insets left="20.0" top="5.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="70.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </Pane>
+    </children>
 
 </AnchorPane>

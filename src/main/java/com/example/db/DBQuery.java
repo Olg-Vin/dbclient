@@ -3,6 +3,8 @@ package com.example.db;
 import com.example.db.entity.Hall;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBQuery {
     // функция для получения данных из таблицы "hall"
@@ -52,8 +54,16 @@ public class DBQuery {
         dbHandler.ConnectionClose();
     }
 
-    public static void main(String[] args) throws SQLException {
-        DBQuery dbQuery = new DBQuery();
-        dbQuery.deleteInfo("employee", "1111 111111");
+    public List<String > createColumns(String table) throws SQLException {
+        ResultSetMetaData resultSet = getMeta(table);
+        int count = resultSet.getColumnCount();
+        List<String> list = new ArrayList<>();
+        for (int i = 1; i <= count; i++){
+            list.add(resultSet.getColumnName(i));
+        }
+        for (int i = 0; i < count; i++){
+            System.out.println(list.get(i));
+        }
+        return list;
     }
 }
