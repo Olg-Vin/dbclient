@@ -46,7 +46,7 @@ public class AddExcursion implements Initializable {
             gotAddButton.setVisible(false);
             gotEditButton.setVisible(true);
 //            System.out.println(getSelectedEmployee());
-            nameEx.setText(getSelected().getExcursion_name());
+            nameEx.setText(getSelected().getPk_excursion_name());
             countEx.setText(String.valueOf(getSelected().getNumber_of_seats()));
         }
         // забираем поля, создаём sql запрос на добавление и закрываем окно
@@ -72,7 +72,7 @@ public class AddExcursion implements Initializable {
                     .append("', number_of_seats='").append(countEx.getText()).append("'");
             System.out.println(values);
             try {
-                dbQuery.updateInfo("excursion", values.toString(), getSelected().getExcursion_name());
+                dbQuery.updateInfo("excursion", values.toString(), getSelected().getPk_excursion_name());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

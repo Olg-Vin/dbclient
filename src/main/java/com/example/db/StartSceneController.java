@@ -95,7 +95,7 @@ public class StartSceneController implements Initializable {
                 }
                 System.out.println(newValue);
                 String keyWord = newValue.toLowerCase();
-                if(hall.getHall_name().toLowerCase().contains(keyWord)){
+                if(hall.getPk_hall_name().toLowerCase().contains(keyWord)){
                     System.out.println("1");
                     return true;
                 }
@@ -132,7 +132,7 @@ public class StartSceneController implements Initializable {
                 }
                 String keyWord = newValue.toLowerCase();
                 System.out.println("func");
-                if(Hall.getHall_name().toLowerCase().contains(keyWord)){return true;}
+                if(Hall.getPk_hall_name().toLowerCase().contains(keyWord)){return true;}
                 else if (Hall.getCount_of_items().toString().toLowerCase().contains(keyWord)){return true;}
                 else if (Hall.getTheme().toLowerCase().contains(keyWord)){return true;}
                 else {return false;}

@@ -4,12 +4,12 @@ package com.example.db.entity;
 import java.util.Objects;
 
 public class Hall extends Entity{
-    private String hall_name;
+    private String pk_hall_name;
     private Integer count_of_items;
     private String theme;
 
     public Hall(String hall_name, Integer count_of_items, String theme) {
-        this.hall_name = hall_name;
+        this.pk_hall_name = hall_name;
         this.count_of_items = count_of_items;
         this.theme = theme;
     }
@@ -18,12 +18,12 @@ public class Hall extends Entity{
 
     }
 
-    public String getHall_name() {
-        return hall_name;
+    public String getPk_hall_name() {
+        return pk_hall_name;
     }
 
-    public void setHall_name(String hall_name) {
-        this.hall_name = hall_name;
+    public void setPk_hall_name(String pk_hall_name) {
+        this.pk_hall_name = pk_hall_name;
     }
 
     public Integer getCount_of_items() {
@@ -47,18 +47,18 @@ public class Hall extends Entity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Hall hall = (Hall) o;
-        return Objects.equals(hall_name, hall.hall_name) && Objects.equals(count_of_items, hall.count_of_items) && Objects.equals(theme, hall.theme);
+        return Objects.equals(pk_hall_name, hall.pk_hall_name) && Objects.equals(count_of_items, hall.count_of_items) && Objects.equals(theme, hall.theme);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hall_name, count_of_items, theme);
+        return Objects.hash(pk_hall_name, count_of_items, theme);
     }
 
     @Override
     public String toString() {
         return "Hall{" +
-                "hall_name='" + hall_name + '\'' +
+                "hall_name='" + pk_hall_name + '\'' +
                 ", count_of_items=" + count_of_items +
                 ", theme='" + theme + '\'' +
                 '}';

@@ -16,10 +16,6 @@
         <property name="show_sql">true</property>
 
         <!-- Annotated entity classes -->
-        <!--<mapping class="com.example.db.hibernate.ConnectedEntity"/>
-        <mapping class="com.example.db.hibernate.MuseumItemEntity"/>
-        <mapping class="com.example.db.hibernate.SupportEntity"/>-->
-        <mapping class="com.example.db.hibernate.ExcursionEntity"/>
 <!--        <mapping class="ContractEntity"/>-->
 
         <!-- List of XML mapping files -->

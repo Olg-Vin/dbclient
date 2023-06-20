@@ -32,12 +32,7 @@ public class MyScene implements Initializable {
 
     @FXML
     public TableView<Object> table;
-    @FXML public TableColumn<Object, String> A; @FXML public TableColumn<Object, String> B;
-    @FXML public TableColumn<Object, String> C; @FXML public TableColumn<Object, String> D;
-    @FXML public TableColumn<Object, String> E; @FXML public TableColumn<Object, String> F;
-    @FXML public TableColumn<Object, String> G; @FXML public TableColumn<Object, String> H;
-    @FXML public TableColumn<Object, String> I;@FXML public TableColumn<Object, String> J;
-    List<TableColumn<Object, String>> list = new ArrayList<>();
+//    List<TableColumn<Object, String>> list = new ArrayList<>();
 
     @FXML public Button buttonEmployee; @FXML public Button buttonHall;
              static ObservableList<Object> data = FXCollections.observableArrayList();
@@ -59,6 +54,7 @@ public class MyScene implements Initializable {
 
 //    public Object selectedItem = table.getSelectionModel().getSelectedItem();
     public static boolean buttonFlag;
+    public static boolean joinFlag = false;
 
     DBHandler dbHandler = new DBHandler();
     DBQuery dbQuery = new DBQuery();
@@ -107,30 +103,102 @@ public class MyScene implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        createColumns();
+//        createColumns();
         buttonHall.setOnAction(actionEvent -> {
-            setFlag(1);
-            addDataFromHall();
+            String nameTable = "hall";
+            if(joinFlag) {
+                if (DBQuery.joinTables.contains(nameTable)) {
+                    buttonHall.setStyle(
+                            "-fx-background-color: white;");
+                    DBQuery.joinTables.remove(nameTable);
+                } else {
+                    buttonHall.setStyle(
+                            "-fx-background-color: blue;");
+                    DBQuery.joinTables.add(nameTable);
+                }
+            }else {
+                addDataFromHall();
+            setFlag(1);}
         });
         buttonEmployee.setOnAction(actionEvent -> {
+            String nameTable = "employee";
+            if(joinFlag) {
+                if (DBQuery.joinTables.contains(nameTable)) {
+                    buttonEmployee.setStyle(
+                            "-fx-background-color: white;");
+                    DBQuery.joinTables.remove(nameTable);
+                } else {
+                    buttonEmployee.setStyle(
+                            "-fx-background-color: blue;");
+                    DBQuery.joinTables.add(nameTable);
+                }
+            }else {
             setFlag(2);
-            addDataFromEmployee();
+            addDataFromEmployee();}
         });
         buttonExcursion.setOnAction(actionEvent -> {
+            String nameTable = "excursion";
+            if(joinFlag) {
+                if (DBQuery.joinTables.contains(nameTable)) {
+                    buttonExcursion.setStyle(
+                            "-fx-background-color: white;");
+                    DBQuery.joinTables.remove(nameTable);
+                } else {
+                    buttonExcursion.setStyle(
+                            "-fx-background-color: blue;");
+                    DBQuery.joinTables.add(nameTable);
+                }
+            }else {
             setFlag(3);
-            addDataFromExcursion();
+            addDataFromExcursion();}
         });
         buttonFond.setOnAction(actionEvent -> {
+            String nameTable = "fond";
+            if(joinFlag) {
+                if (DBQuery.joinTables.contains(nameTable)) {
+                    buttonFond.setStyle(
+                            "-fx-background-color: white;");
+                    DBQuery.joinTables.remove(nameTable);
+                } else {
+                    buttonFond.setStyle(
+                            "-fx-background-color: blue;");
+                    DBQuery.joinTables.add(nameTable);
+                }
+            }else {
             setFlag(4);
-            addDataFromFond();
+            addDataFromFond();}
         });
         buttonItem.setOnAction(actionEvent -> {
+            String nameTable = "museum_item";
+            if(joinFlag) {
+                if (DBQuery.joinTables.contains(nameTable)) {
+                    buttonItem.setStyle(
+                            "-fx-background-color: white;");
+                    DBQuery.joinTables.remove(nameTable);
+                } else {
+                    buttonItem.setStyle(
+                            "-fx-background-color: blue;");
+                    DBQuery.joinTables.add(nameTable);
+                }
+            }else {
             setFlag(5);
-            addDataFromMuseumItem();
+            addDataFromMuseumItem();}
         });
         buttonSupport.setOnAction(actionEvent -> {
+            String nameTable = "support";
+            if(joinFlag) {
+                if (DBQuery.joinTables.contains(nameTable)) {
+                    buttonSupport.setStyle(
+                            "-fx-background-color: white;");
+                    DBQuery.joinTables.remove(nameTable);
+                } else {
+                    buttonSupport.setStyle(
+                            "-fx-background-color: blue;");
+                    DBQuery.joinTables.add(nameTable);
+                }
+            }else {
             setFlag(6);
-            addDataFromSupport();
+            addDataFromSupport();}
         });
         buttonDelete.setOnAction(actionEvent -> {
             Object selectedItem = table.getSelectionModel().getSelectedItem();
@@ -141,27 +209,27 @@ public class MyScene implements Initializable {
                 switch (flag) {
                     case 1 -> {
                         Hall hall = (Hall) selectedItem;
-                        dbQuery.deleteInfo("hall", hall.getHall_name());
+                        dbQuery.deleteInfo("hall", hall.getPk_hall_name());
                     }
                     case 2 -> {
                         Employee employee = (Employee) selectedItem;
-                        dbQuery.deleteInfo("employee", employee.getPassport());
+                        dbQuery.deleteInfo("employee", employee.getPk_employee_passport());
                     }
                     case 3 -> {
                         Excursion excursion = (Excursion) selectedItem;
-                        dbQuery.deleteInfo("excursion", excursion.getExcursion_name());
+                        dbQuery.deleteInfo("excursion", excursion.getPk_excursion_name());
                     }
                     case 4 -> {
                         Fond fond = (Fond) selectedItem;
-                        dbQuery.deleteInfo("fond", fond.getFond_name());
+                        dbQuery.deleteInfo("fond", fond.getPk_fond_name());
                     }
                     case 5 -> {
                         MuseumItem museumItem = (MuseumItem) selectedItem;
-                        dbQuery.deleteInfo("museum_item", String.valueOf(museumItem.getInventory_number()));
+                        dbQuery.deleteInfo("museum_item", String.valueOf(museumItem.getPk_inventory_number()));
                     }
                     case 6 -> {
                         Support support = (Support) selectedItem;
-                        dbQuery.deleteInfo("support", String.valueOf(support.getSupport_id()));
+                        dbQuery.deleteInfo("support", String.valueOf(support.getPk_support_id()));
                     }
                 }
             } catch (SQLException e) {
@@ -193,8 +261,7 @@ public class MyScene implements Initializable {
                         rs.getString(3));
                 data.add(support);
             }
-            Support support = new Support();
-            createColumns(support);
+            createColumns("support");
             table.setItems(data);
         }
         catch (SQLException e){
@@ -211,11 +278,9 @@ public class MyScene implements Initializable {
                 MuseumItem museumItem = new MuseumItem(rs.getInt(1), rs.getString(5),
                         rs.getString(7),rs.getString(4), rs.getString(8),
                         rs.getString(2), rs.getString(3),rs.getString(6));
-                System.out.println("rs.next = " + museumItem);
                 data.add(museumItem);
             }
-            MuseumItem museumItem = new MuseumItem();
-            createColumns(museumItem);
+            createColumns("museum_item");
             table.setItems(data);
         }
         catch (SQLException e){
@@ -233,8 +298,7 @@ public class MyScene implements Initializable {
                         rs.getString(2));
                 data.add(fond);
             }
-            Fond fond = new Fond();
-            createColumns(fond);
+            createColumns("fond");
             table.setItems(data);
         }
         catch (SQLException e){
@@ -252,8 +316,7 @@ public class MyScene implements Initializable {
                         rs.getInt(2));
                 data.add(excursion);
             }
-            Excursion excursion = new Excursion();
-            createColumns(excursion);
+            createColumns("excursion");
             table.setItems(data);
         }
         catch (SQLException e){
@@ -271,8 +334,7 @@ public class MyScene implements Initializable {
                         rs.getInt(2), rs.getString(3));
                 data.add(hall);
             }
-            Hall hall = new Hall();
-            createColumns(hall);
+            createColumns("hall");
             table.setItems(data);
         }
         catch (SQLException e){
@@ -293,30 +355,12 @@ public class MyScene implements Initializable {
                 data.add(employee);
 
             }
-            Employee employee = new Employee();
-            createColumns(employee);
+            createColumns("employee");
             table.setItems(data);
         }
         catch (SQLException e){
             System.out.println(e);
         }
-    }
-    private void createColumns (Entity ent){
-        String[] c = ent.columns();
-        A.setCellValueFactory(new PropertyValueFactory<>(c.length <= 0 ? null:c[0]));
-        B.setCellValueFactory(new PropertyValueFactory<>(c.length <= 1 ? null:c[1]));
-        C.setCellValueFactory(new PropertyValueFactory<>(c.length <= 2 ? null:c[2]));
-        D.setCellValueFactory(new PropertyValueFactory<>(c.length <= 3 ? null:c[3]));
-        E.setCellValueFactory(new PropertyValueFactory<>(c.length <= 4 ? null:c[4]));
-        F.setCellValueFactory(new PropertyValueFactory<>(c.length <= 5 ? null:c[5]));
-        G.setCellValueFactory(new PropertyValueFactory<>(c.length <= 6 ? null:c[6]));
-        H.setCellValueFactory(new PropertyValueFactory<>(c.length <= 7 ? null:c[7]));
-        I.setCellValueFactory(new PropertyValueFactory<>(c.length <= 8 ? null:c[8]));
-        J.setCellValueFactory(new PropertyValueFactory<>(c.length <= 9 ? null:c[9]));
-    }
-    private void createColumns(String table) throws SQLException {
-        List<String > columnsName = dbQuery.createColumns(table);
-
     }
 
 // выбираем строку и передаём объект в нужный класс для работы
@@ -338,17 +382,39 @@ public class MyScene implements Initializable {
     }
     private static List<Integer> tables = new ArrayList<>();
 
-    public void joinMode(ActionEvent actionEvent) {
-
-    }
     public static ObservableList<TableColumn<Object, String>> columns = FXCollections.observableArrayList();
-    private void createColumns() {
-        for (int i = 0; i < 20; i++) {
+
+    private void createColumns(String tab) throws SQLException {
+        table.getColumns().clear();
+        columns.clear();
+        List<String > columnsName = dbQuery.createColumns(tab);
+        for (int i = 0; i<columnsName.size(); i++){
+//            columns.get(i).setCellValueFactory(new PropertyValueFactory<>(columnsName.get(i)));
             TableColumn<Object, String> column = new TableColumn<>("Column " + (i + 1));
-            column.setCellValueFactory(new PropertyValueFactory<>(null));
+            column.setCellValueFactory(new PropertyValueFactory<>(columnsName.get(i)));
             columns.add(column);
         }
         table.getColumns().addAll(columns);
+    }
+    public void joinMode(ActionEvent actionEvent) {
+        if (joinFlag){
+            DBQuery.joinTables.clear();
+            table.getColumns().clear();
+            data.clear();
+            buttonHall.setStyle(
+                    "-fx-background-color: white;");
+            buttonExcursion.setStyle(
+                    "-fx-background-color: white;");
+            buttonEmployee.setStyle(
+                    "-fx-background-color: white;");
+            buttonSupport.setStyle(
+                    "-fx-background-color: white;");
+            buttonFond.setStyle(
+                    "-fx-background-color: white;");
+            buttonItem.setStyle(
+                    "-fx-background-color: white;");
+            joinFlag=false;}
+        else {joinFlag=true;}
     }
 }
 

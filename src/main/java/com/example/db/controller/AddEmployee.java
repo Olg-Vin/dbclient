@@ -47,10 +47,10 @@ public class AddEmployee implements Initializable {
             gotAddButton.setVisible(false);
             gotEditButton.setVisible(true);
 //            System.out.println(getSelectedEmployee());
-            passportEm.setText(getSelectedEmployee().getPassport());
+            passportEm.setText(getSelectedEmployee().getPk_employee_passport());
             fullNameEm.setText(getSelectedEmployee().getFull_name());
             educationEm.setText(getSelectedEmployee().getEducation());
-            fondsEm.setPromptText(getSelectedEmployee().getFond_name());
+            fondsEm.setPromptText(getSelectedEmployee().getFk_fond_name());
             titleEm.setText(getSelectedEmployee().getJob_title());
             startDateEm.setText(getSelectedEmployee().getStart_date());
         }
@@ -77,17 +77,17 @@ public class AddEmployee implements Initializable {
         });
         gotEditButton.setOnAction(actionEvent -> {
             Employee employee = new Employee(passportEm.getText(), fullNameEm.getText(), titleEm.getText(),
-                    startDateEm.getText(), educationEm.getText(), fondsEm.getValue()==null ? getSelectedEmployee().getFond_name():fondsEm.getValue());
+                    startDateEm.getText(), educationEm.getText(), fondsEm.getValue()==null ? getSelectedEmployee().getFk_fond_name():fondsEm.getValue());
             StringBuilder values = new StringBuilder();
             values.append("pk_employee_passport='").append(passportEm.getText())
                     .append("', full_name='").append(fullNameEm.getText())
                     .append("', job_title='").append(titleEm.getText())
                     .append("', start_date='").append(startDateEm.getText())
                     .append("', education='").append(educationEm.getText())
-                    .append("', fk_fond_name='").append(fondsEm.getValue()==null ? getSelectedEmployee().getFond_name():fondsEm.getValue()).append("'");
+                    .append("', fk_fond_name='").append(fondsEm.getValue()==null ? getSelectedEmployee().getFk_fond_name():fondsEm.getValue()).append("'");
             System.out.println(values);
             try {
-                dbQuery.updateInfo("employee", values.toString(), getSelectedEmployee().getPassport());
+                dbQuery.updateInfo("employee", values.toString(), getSelectedEmployee().getPk_employee_passport());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

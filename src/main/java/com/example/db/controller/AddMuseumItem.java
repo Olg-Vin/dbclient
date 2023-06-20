@@ -60,7 +60,7 @@ public class AddMuseumItem implements Initializable {
         if (MyScene.buttonFlag){
             gotAddButton.setVisible(false);
             gotEditButton.setVisible(true);
-            inventoryNumber.setText(String.valueOf(getSelected().getInventory_number()));
+            inventoryNumber.setText(String.valueOf(getSelected().getPk_inventory_number()));
             name.setText(getSelected().getName_of_item());
             System.out.println("getSelected().getName_of_item() = " + getSelected().getName_of_item());
             safely.setPromptText(getSelected().getSafely());
@@ -68,7 +68,7 @@ public class AddMuseumItem implements Initializable {
             author.setText(getSelected().getAuthor());
             story.setText(getSelected().getStory());
             create.setText(getSelected().getDate_of_creation());
-            fondsEm.setPromptText(getSelected().getFond_name());
+            fondsEm.setPromptText(getSelected().getFk_fond_name());
         }
         // забираем поля, создаём sql запрос на добавление и закрываем окно
         gotAddButton.setOnAction(actionEvent -> {
@@ -99,7 +99,7 @@ public class AddMuseumItem implements Initializable {
         gotEditButton.setOnAction(actionEvent -> {
             MuseumItem museumItem = new MuseumItem(Integer.parseInt(inventoryNumber.getText()), author.getText(),
                     create.getText(), discovery.getText(),
-                    fondsEm.getValue()==null ? getSelected().getFond_name():fondsEm.getValue(),
+                    fondsEm.getValue()==null ? getSelected().getFk_fond_name():fondsEm.getValue(),
                     name.getText(),
                     safely.getValue()==null ? getSelected().getSafely():safely.getValue(),
                     story.getText());
@@ -112,10 +112,10 @@ public class AddMuseumItem implements Initializable {
                     .append("', autor='").append(author.getText())
                     .append("', story='").append(story.getText())
                     .append("', date_of_creation='").append(create.getText())
-                    .append("', fk_fond_name='").append(fondsEm.getValue()==null ? getSelected().getFond_name():fondsEm.getValue()).append("'");
+                    .append("', fk_fond_name='").append(fondsEm.getValue()==null ? getSelected().getFk_fond_name():fondsEm.getValue()).append("'");
             System.out.println(values);
             try {
-                dbQuery.updateInfo("museum_item", values.toString(), String.valueOf(getSelected().getInventory_number()));
+                dbQuery.updateInfo("museum_item", values.toString(), String.valueOf(getSelected().getPk_inventory_number()));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

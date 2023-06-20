@@ -48,8 +48,8 @@ public class AddSupport implements Initializable {
         if (MyScene.buttonFlag){
             gotAddButton.setVisible(false);
             gotEditButton.setVisible(true);
-            idSupport.setText(String.valueOf(getSelected().getSupport_id()));
-            nameFond.setPromptText(getSelected().getFond_name());
+            idSupport.setText(String.valueOf(getSelected().getPk_support_id()));
+            nameFond.setPromptText(getSelected().getFk_fond_name());
             material.setText(getSelected().getMaterials());
         }
         // забираем поля, создаём sql запрос на добавление и закрываем окно
@@ -78,7 +78,7 @@ public class AddSupport implements Initializable {
                     .append("', materials='").append(material.getText()).append("'");
             System.out.println(values);
             try {
-                dbQuery.updateInfo("support", values.toString(), String.valueOf(getSelected().getSupport_id()));
+                dbQuery.updateInfo("support", values.toString(), String.valueOf(getSelected().getPk_support_id()));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

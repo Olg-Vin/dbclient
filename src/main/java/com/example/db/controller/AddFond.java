@@ -39,7 +39,7 @@ public class AddFond implements Initializable {
         if (MyScene.buttonFlag){
             gotAddButton.setVisible(false);
             gotEditButton.setVisible(true);
-            nameFond.setText(getSelected().getFond_name());
+            nameFond.setText(getSelected().getPk_fond_name());
             dateFond.setText(String.valueOf(getSelected().getFounding_date()));
         }
         // забираем поля, создаём sql запрос на добавление и закрываем окно
@@ -68,7 +68,7 @@ public class AddFond implements Initializable {
                     .append("', founding_date='").append(dateFond.getText()).append("'");
             System.out.println(values);
             try {
-                dbQuery.updateInfo("fond", values.toString(), getSelected().getFond_name());
+                dbQuery.updateInfo("fond", values.toString(), getSelected().getPk_fond_name());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

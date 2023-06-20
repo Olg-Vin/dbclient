@@ -40,7 +40,7 @@ public class AddHall implements Initializable {
         if (MyScene.buttonFlag){
             gotAddButton.setVisible(false);
             gotEditButton.setVisible(true);
-            nameHall.setText(getSelected().getHall_name());
+            nameHall.setText(getSelected().getPk_hall_name());
             countItems.setText(String.valueOf(getSelected().getCount_of_items()));
             hallTheme.setText(getSelected().getTheme());
         }
@@ -69,7 +69,7 @@ public class AddHall implements Initializable {
                     .append("', theme='").append(hallTheme.getText()).append("'");
             System.out.println(values);
             try {
-                dbQuery.updateInfo("hall", values.toString(), getSelected().getHall_name());
+                dbQuery.updateInfo("hall", values.toString(), getSelected().getPk_hall_name());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

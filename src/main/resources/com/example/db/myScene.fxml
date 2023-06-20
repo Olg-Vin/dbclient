@@ -18,12 +18,30 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Button fx:id="buttonEmployee" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" text="Сотрудники" />
-                  <Button fx:id="buttonHall" mnemonicParsing="false" prefHeight="40.0" prefWidth="132.0" text="Залы" />
-                  <Button fx:id="buttonItem" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" text="Музейные предметы" textAlignment="CENTER" wrapText="true" />
-                  <Button fx:id="buttonSupport" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Вспомогательные материалы" textAlignment="CENTER" wrapText="true" />
-                  <Button fx:id="buttonExcursion" mnemonicParsing="false" prefHeight="40.0" prefWidth="163.0" text="Экскурсии" />
-                  <Button fx:id="buttonFond" maxHeight="40.0" maxWidth="218.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="218.0" text="Фонды" />
+                  <Button fx:id="buttonEmployee" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: #FFFFFF;" text="Сотрудники">
+                     <VBox.margin>
+                        <Insets bottom="1.0" />
+                     </VBox.margin></Button>
+                  <Button fx:id="buttonHall" mnemonicParsing="false" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: #FFFFFF;" text="Залы">
+                     <VBox.margin>
+                        <Insets bottom="1.0" />
+                     </VBox.margin></Button>
+                  <Button fx:id="buttonItem" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #FFFFFF;" text="Музейные предметы" textAlignment="CENTER" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="1.0" />
+                     </VBox.margin></Button>
+                  <Button fx:id="buttonSupport" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF;" text="Вспомогательные материалы" textAlignment="CENTER" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="1.0" />
+                     </VBox.margin></Button>
+                  <Button fx:id="buttonExcursion" mnemonicParsing="false" prefHeight="40.0" prefWidth="163.0" style="-fx-background-color: #FFFFFF;" text="Экскурсии">
+                     <padding>
+                        <Insets bottom="1.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="1.0" />
+                     </VBox.margin></Button>
+                  <Button fx:id="buttonFond" maxHeight="40.0" maxWidth="218.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="218.0" style="-fx-background-color: #FFFFFF;" text="Фонды" />
                </children>
             </VBox>
          </left>
@@ -33,19 +51,7 @@
          <center>
             <TableView fx:id="table" onMouseClicked="#handleRowSelection" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                  <TableColumn fx:id="A" prefWidth="75.0" text="A" />
-                  <TableColumn fx:id="B" prefWidth="75.0" text="B" />
-                  <TableColumn fx:id="C" prefWidth="75.0" text="C" />
-                  <TableColumn fx:id="D" prefWidth="75.0" text="D" />
-                  <TableColumn fx:id="E" prefWidth="75.0" text="E" />
-                  <TableColumn fx:id="F" prefWidth="75.0" text="F" />
-                  <TableColumn fx:id="G" prefWidth="75.0" text="G" />
-                  <TableColumn fx:id="H" prefWidth="75.0" text="H" />
-                  <TableColumn fx:id="I" prefWidth="75.0" text="I" />
-                  <TableColumn fx:id="J" prefWidth="75.0" text="J" />
-                  <TableColumn fx:id="K" prefWidth="75.0" text="K" />
-                  <TableColumn fx:id="L" prefWidth="75.0" text="L" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
+
               </columns>
             </TableView>
          </center>
@@ -72,7 +78,7 @@
                               <Insets left="10.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <CheckBox mnemonicParsing="false" onAction="#joinMode" prefHeight="17.0" prefWidth="70.0" text="Связать" textFill="#000cff">
+                        <CheckBox fx:id="joinId" mnemonicParsing="false" onAction="#joinMode" prefHeight="17.0" prefWidth="70.0" text="Связать" textFill="#000cff">
                            <HBox.margin>
                               <Insets left="70.0" top="10.0" />
                            </HBox.margin>

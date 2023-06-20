@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBQuery {
-    // функция для получения данных из таблицы "hall"
+    public static List<String> joinTables = new ArrayList<>();
     DBHandler dbHandler = new DBHandler();
     ResultSet rs = null;
     public ResultSetMetaData getMeta(String table) throws SQLException {
@@ -30,7 +30,18 @@ public class DBQuery {
         }
         return rs;
     }
-
+    public ResultSet getInfo(List<String> joinTables){
+        PreparedStatement ps = null;
+        String query = "SELECT * FROM ";
+        try {
+            ps = dbHandler.getConnection().prepareStatement(query);
+            rs = ps.executeQuery();
+            dbHandler.ConnectionClose();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+    }
     public void insertInfo(String table, String values) throws SQLException {
         String query = "INSERT INTO " + table + " VALUES (" + values + ")";
         System.out.println(query);
@@ -66,4 +77,5 @@ public class DBQuery {
         }
         return list;
     }
+
 }

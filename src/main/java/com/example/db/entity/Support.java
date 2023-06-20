@@ -3,13 +3,13 @@ package com.example.db.entity;
 import java.util.Objects;
 
 public class Support extends Entity{
-    private Integer support_id;
-    private String fond_name;
+    private Integer pk_support_id;
+    private String fk_fond_name;
     private String materials;
 
     public Support(Integer support_id, String fond_name, String materials) {
-        this.support_id = support_id;
-        this.fond_name = fond_name;
+        this.pk_support_id = support_id;
+        this.fk_fond_name = fond_name;
         this.materials = materials;
     }
 
@@ -17,20 +17,20 @@ public class Support extends Entity{
 
     }
 
-    public Integer getSupport_id() {
-        return support_id;
+    public Integer getPk_support_id() {
+        return pk_support_id;
     }
 
-    public void setSupport_id(Integer support_id) {
-        this.support_id = support_id;
+    public void setPk_support_id(Integer pk_support_id) {
+        this.pk_support_id = pk_support_id;
     }
 
-    public String getFond_name() {
-        return fond_name;
+    public String getFk_fond_name() {
+        return fk_fond_name;
     }
 
-    public void setFond_name(String fond_name) {
-        this.fond_name = fond_name;
+    public void setFk_fond_name(String fk_fond_name) {
+        this.fk_fond_name = fk_fond_name;
     }
 
     public String getMaterials() {
@@ -46,19 +46,19 @@ public class Support extends Entity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Support support = (Support) o;
-        return Objects.equals(support_id, support.support_id) && Objects.equals(fond_name, support.fond_name) && Objects.equals(materials, support.materials);
+        return Objects.equals(pk_support_id, support.pk_support_id) && Objects.equals(fk_fond_name, support.fk_fond_name) && Objects.equals(materials, support.materials);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(support_id, fond_name, materials);
+        return Objects.hash(pk_support_id, fk_fond_name, materials);
     }
 
     @Override
     public String toString() {
         return "Support{" +
-                "support_id=" + support_id +
-                ", fond_name='" + fond_name + '\'' +
+                "support_id=" + pk_support_id +
+                ", fond_name='" + fk_fond_name + '\'' +
                 ", materials='" + materials + '\'' +
                 '}';
     }
