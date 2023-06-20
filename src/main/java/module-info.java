@@ -8,7 +8,7 @@ module com.example.db {
 
     opens com.example.db.entity to javafx.base;
     opens com.example.db to javafx.fxml;
-    opens com.example.db.hibernate to org.hibernate.orm.core;
     exports com.example.db;
-    exports com.example.db.hibernate;
+    exports com.example.db.controller;
+    opens com.example.db.controller to javafx.fxml;
 }

@@ -1,25 +1,28 @@
-package com.example.db;
+package com.example.db.controller;
 
+import com.example.db.DBHandler;
+import com.example.db.DBQuery;
+import com.example.db.HelloApplication;
 import com.example.db.entity.*;
-import com.example.db.hibernate.ExcursionEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -33,7 +36,7 @@ public class MyScene implements Initializable {
     @FXML public TableColumn<Object, String> G; @FXML public TableColumn<Object, String> H;
     @FXML public TableColumn<Object, String> I;@FXML public TableColumn<Object, String> J;
     @FXML public Button buttonEmployee; @FXML public Button buttonHall;
-            private final ObservableList<Object> data = FXCollections.observableArrayList();
+             static ObservableList<Object> data = FXCollections.observableArrayList();
     @FXML
     public TextField textField;
     @FXML
@@ -46,68 +49,111 @@ public class MyScene implements Initializable {
     public Button buttonFond;
     @FXML
     public Button buttonAdd;
-    @FXML
-    public Pane shadowPane;
-    @FXML
-    public Pane popupEmployee;
-    @FXML
-    public Button buttonClose;
-    @FXML
-    public Button gotAddButton;
-    public TextField passportEm; public TextField fullNameEm; public TextField educationEm;
-    public TextField FondNameEm; public TextField titleEm; public TextField startDateEm;
+    public Button buttonDelete;
+    public Button buttonUpdate;
+
+//    public Object selectedItem = table.getSelectionModel().getSelectedItem();
+    public static boolean buttonFlag;
     DBHandler dbHandler = new DBHandler();
-    private int flag = 0;
+    DBQuery dbQuery = new DBQuery();
+    private int flag;
+    @FXML
+    public void openAddScene(ActionEvent actionEvent) throws IOException {
+        buttonFlag = false;
+        switch (flag) {
+            case 1: System.out.println("1");break;
+            case 2: addScene(actionEvent, "addEmployee.fxml");break;
+        }
+    }
+    @FXML
+    public void openEditScene(ActionEvent actionEvent) throws IOException {
+//        Object selectedItem = table.getSelectionModel().getSelectedItem();
+        buttonFlag = true;
+        switch (flag) {
+            case 1: System.out.println("1");break;
+            case 2: addScene(actionEvent, "addEmployee.fxml");break;
+        }
+    }
+    private void addScene(ActionEvent actionEvent, String sceneSource) throws IOException {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource(sceneSource));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("данные");
+        stage.setScene(new Scene(root));
+        Node source = (Node) actionEvent.getSource();
+        Stage currentStage = (Stage) source.getScene().getWindow();
+        stage.initOwner(currentStage);
+        stage.show();
+    }
+    public int getFlag() {
+        return flag;
+    }
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         buttonHall.setOnAction(actionEvent -> {
-            flag = 1;
+            setFlag(1);
             addDataFromHall();
         });
         buttonEmployee.setOnAction(actionEvent -> {
-            flag = 2;
+            setFlag(2);
             addDataFromEmployee();
         });
         buttonExcursion.setOnAction(actionEvent -> {
-            flag = 3;
+            setFlag(3);
             addDataFromExcursion();
         });
         buttonFond.setOnAction(actionEvent -> {
-            flag = 4;
+            setFlag(4);
             addDataFromFond();
         });
         buttonItem.setOnAction(actionEvent -> {
-            flag = 5;
+            setFlag(5);
             addDataFromMuseumItem();
         });
         buttonSupport.setOnAction(actionEvent -> {
-            flag = 6;
+            setFlag(6);
             addDataFromSupport();
         });
-        buttonAdd.setOnAction(actionEvent -> {
-            shadowPane.setVisible(true);
-            switch (flag) {
-                case 1: break;
-                case 2: popupEmployee.setVisible(true); break;
+        buttonDelete.setOnAction(actionEvent -> {
+            Object selectedItem = table.getSelectionModel().getSelectedItem();
+            table.getItems().remove(selectedItem);
+            System.out.println(selectedItem.toString());
+            try {
+                switch (flag) {
+                    case 1 -> System.out.println("1");
+                    case 2 -> {
+                        Employee employee = (Employee) selectedItem;
+                        dbQuery.deleteInfo("employee", employee.getPassport());
+                    }
+                }
+            } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        });
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            table.setItems(filterData(newValue, data));
+        });
+    }
+    // Метод для фильтрации данных в таблице
+    private ObservableList<Object> filterData(String keyword, ObservableList<Object> originalData) {
+        ObservableList<Object> filteredData = FXCollections.observableArrayList();
+        for (Object item : originalData) {
+            if (item.toString().contains(keyword)) { // Здесь toString() должен возвращать соответствующее значение для фильтрации
+                filteredData.add(item);
             }
-        });
-        buttonClose.setOnAction(actionEvent -> {
-            shadowPane.setVisible(false);
-            popupEmployee.setVisible(false);
-        });
-        gotAddButton.setOnAction(actionEvent -> {
-            switch (flag){
-                case 1: break;
-                case 2: Employee employee = new Employee(passportEm.getText(), fullNameEm.getText(), educationEm.getText(),
-                        FondNameEm.getText(), titleEm.getText(), startDateEm.getText());
-            }
-        });
+        }
+        return filteredData;
     }
     private void addDataFromSupport (){
         table.getItems().clear();
+        data.clear();
         String query = "SELECT*FROM support";
-        ResultSet rs = dbHandler.getInfo(query);
+        ResultSet rs = dbQuery.getInfo(query);
         try {
             while (rs.next()){
                 Support support = new Support(rs.getInt(1), rs.getString(2),
@@ -124,8 +170,9 @@ public class MyScene implements Initializable {
     }
     private void addDataFromMuseumItem (){
         table.getItems().clear();
+        data.clear();
         String query = "SELECT*FROM museum_item";
-        ResultSet rs = dbHandler.getInfo(query);
+        ResultSet rs = dbQuery.getInfo(query);
         try {
             while (rs.next()){
                 MuseumItem museumItem = new MuseumItem(rs.getInt(1), rs.getString(2),
@@ -143,8 +190,9 @@ public class MyScene implements Initializable {
     }
     private void addDataFromFond (){
         table.getItems().clear();
+        data.clear();
         String query = "SELECT*FROM fond";
-        ResultSet rs = dbHandler.getInfo(query);
+        ResultSet rs = dbQuery.getInfo(query);
         try {
             while (rs.next()){
                 Fond fond = new Fond(rs.getString(1),
@@ -160,20 +208,10 @@ public class MyScene implements Initializable {
         }
     }
     private void addDataFromExcursion (){
-//        Hiber hiber = new Hiber();
-        List<ExcursionEntity> list = new ArrayList<>(Hiber.query());
-        data.addAll(list);
-        createColumns(new Excursion());
-        table.setItems(data);
-//        while (list.next()){
-//            Excursion excursion = new Excursion(rs.getString(1),
-//                    rs.getInt(2));
-//            data.add(excursion);
-//        }
-
-        /*table.getItems().clear();
+        table.getItems().clear();
+        data.clear();
         String query = "SELECT*FROM excursion";
-        ResultSet rs = dbHandler.getInfo(query);
+        ResultSet rs = dbQuery.getInfo(query);
         try {
             while (rs.next()){
                 Excursion excursion = new Excursion(rs.getString(1),
@@ -186,12 +224,13 @@ public class MyScene implements Initializable {
         }
         catch (SQLException e){
             System.out.println(e);
-        }*/
+        }
     }
     private void addDataFromHall (){
         table.getItems().clear();
+        data.clear();
         String query = "SELECT*FROM hall";
-        ResultSet rs = dbHandler.getInfo(query);
+        ResultSet rs = dbQuery.getInfo(query);
         try {
             while (rs.next()){
                 Hall hall = new Hall(rs.getString(1),
@@ -208,8 +247,9 @@ public class MyScene implements Initializable {
     }
     private void addDataFromEmployee (){
         table.getItems().clear();
+        data.clear();
         String query = "SELECT*FROM employee";
-        ResultSet rs = dbHandler.getInfo(query);
+        ResultSet rs = dbQuery.getInfo(query);
 
         try {
             while (rs.next()){
@@ -239,6 +279,16 @@ public class MyScene implements Initializable {
         H.setCellValueFactory(new PropertyValueFactory<>(c.length <= 7 ? null:c[7]));
         I.setCellValueFactory(new PropertyValueFactory<>(c.length <= 8 ? null:c[8]));
         J.setCellValueFactory(new PropertyValueFactory<>(c.length <= 9 ? null:c[9]));
+    }
+
+
+    public void handleRowSelection(MouseEvent mouseEvent) {
+        System.out.println("row was choose");
+        Object selectedEmployee = table.getSelectionModel().getSelectedItem();
+        if (selectedEmployee != null) {
+            AddEmployee addEmployee = new AddEmployee((Employee) selectedEmployee);
+            // Вызов методов в классе AddEmployee или открытие нового окна
+        }
     }
 }
 

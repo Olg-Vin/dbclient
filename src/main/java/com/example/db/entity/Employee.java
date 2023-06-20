@@ -3,7 +3,6 @@ package com.example.db.entity;
 import java.util.Objects;
 
 public class Employee extends Entity{
-    Object object;
     private String passport;
     private String education;
     private String fond_name;
@@ -11,7 +10,7 @@ public class Employee extends Entity{
     private String job_title;
     private String start_date;
 
-    public Employee(String passport, String education, String fond_name, String full_name, String job_title, String start_date) {
+    public Employee(String passport, String full_name, String job_title, String start_date, String education, String fond_name) {
         this.passport = passport;
         this.education = education;
         this.fond_name = fond_name;
@@ -99,7 +98,7 @@ public class Employee extends Entity{
     }
     @Override
     public String[] columns(){
-        return new String[]{"passport", "education", "fond_name",
-        "full_name", "job_title", "start_date"};
+        return new String[]{"passport", "full_name", "fond_name",
+        "job_title", "education", "start_date"};
     }
 }

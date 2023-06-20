@@ -34,6 +34,7 @@ public class StartSceneController implements Initializable {
     @FXML
     public TextField textField;
     DBHandler dbHandler = new DBHandler();
+    DBQuery dbQuery = new DBQuery();
     @FXML
     public TableView<Hall> table_id;
     @FXML
@@ -52,7 +53,11 @@ public class StartSceneController implements Initializable {
                     themeField.getText());
             data.add(hall);
             table_id.scrollTo(hall);
-            dbHandler.insertInfo(hall);
+            try {
+                dbQuery.insertInfo("hall", "");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
         button2.setOnAction(actionEvent ->{
             addData();
@@ -64,7 +69,7 @@ public class StartSceneController implements Initializable {
 //            searchData();
         });
         String query = "";
-        ResultSet rs = dbHandler.getInfo(query);
+        ResultSet rs = dbQuery.getInfo(query);
         try {
 //            while (rs.next()) {
 //                System.out.println("add");
@@ -139,7 +144,7 @@ public class StartSceneController implements Initializable {
     }
     private void addData (){
         String query = "";
-        ResultSet rs = dbHandler.getInfo(query);
+        ResultSet rs = dbQuery.getInfo(query);
         try {
             while (rs.next()){
                 Hall hall = new Hall(rs.getString(1),

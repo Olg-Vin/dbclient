@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="520.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.db.MyScene">
+<AnchorPane prefHeight="520.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.db.controller.MyScene">
    <children>
       <BorderPane opacity="0.51" style="-fx-background-color: #006400;" AnchorPane.bottomAnchor="0.0">
          <left>
@@ -31,7 +31,7 @@
             <HBox prefHeight="24.0" prefWidth="840.0" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
-            <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="table" onMouseClicked="#handleRowSelection" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="A" prefWidth="75.33331298828125" text="A" />
                 <TableColumn fx:id="B" prefWidth="76.00003051757812" text="B" />
@@ -54,9 +54,24 @@
                <center>
                   <HBox prefHeight="37.0" prefWidth="401.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="buttonAdd" mnemonicParsing="false" text="Добавить">
+                        <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#openAddScene" prefHeight="25.0" prefWidth="70.0" text="Добавить">
                            <HBox.margin>
                               <Insets left="10.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="buttonDelete" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Удалить">
+                           <HBox.margin>
+                              <Insets left="10.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="buttonUpdate" layoutX="100.0" layoutY="15.0" mnemonicParsing="false" onAction="#openEditScene" prefHeight="25.0" prefWidth="70.0" text="Изменить">
+                           <HBox.margin>
+                              <Insets left="10.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Связанное">
+                           <HBox.margin>
+                              <Insets left="90.0" top="5.0" />
                            </HBox.margin>
                         </Button>
                      </children></HBox>
@@ -78,96 +93,5 @@
                </right>
             </BorderPane>
          </top></BorderPane>
-      <Pane fx:id="shadowPane" opacity="0.45" prefHeight="520.0" prefWidth="840.0" style="-fx-background-color: #000000;" visible="false" />
-      <Pane fx:id="popupEmployee" prefHeight="520.0" prefWidth="840.0" visible="false">
-         <children>
-            <VBox layoutX="250.0" layoutY="50.0" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10;">
-               <children>
-                  <BorderPane prefHeight="18.0" prefWidth="350.0">
-                     <right>
-                        <Button fx:id="buttonClose" mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" style="-fx-background-color: #8B0000;" text="X" textFill="RED" BorderPane.alignment="CENTER" />
-                     </right>
-                     <left>
-                        <Label prefHeight="18.0" prefWidth="151.0" text="Добавление данных" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </Label>
-                     </left>
-                     <padding>
-                        <Insets bottom="30.0" />
-                     </padding>
-                  </BorderPane>
-                  <HBox prefHeight="35.0" prefWidth="350.0">
-                     <children>
-                        <TextField fx:id="passportEm">
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin></TextField>
-                        <Label text="Паспорт" />
-                     </children></HBox>
-                  <HBox prefHeight="35.0" prefWidth="350.0">
-                     <children>
-                        <TextField fx:id="fullNameEm">
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin></TextField>
-                        <Label text="ФИО" />
-                     </children></HBox>
-                  <HBox prefHeight="35.0" prefWidth="350.0">
-                     <children>
-                        <TextField fx:id="educationEm">
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin></TextField>
-                        <Label text="Образование" />
-                     </children></HBox>
-                  <HBox prefHeight="35.0" prefWidth="350.0">
-                     <children>
-                        <TextField fx:id="FondNameEm">
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin></TextField>
-                        <Label text="Название фонда" />
-                     </children></HBox>
-                  <HBox prefHeight="35.0" prefWidth="350.0">
-                     <children>
-                        <TextField fx:id="titleEm">
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin></TextField>
-                        <Label text="Должность" />
-                     </children></HBox>
-                  <HBox prefHeight="35.0" prefWidth="350.0">
-                     <children>
-                        <TextField fx:id="startDateEm">
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </HBox.margin></TextField>
-                        <Label text="Дата начала работы" />
-                     </children></HBox>
-                  <HBox prefHeight="45.0" prefWidth="350.0">
-                     <VBox.margin>
-                        <Insets top="70.0" />
-                     </VBox.margin>
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Button">
-                           <HBox.margin>
-                              <Insets left="100.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="gotAddButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Добавить">
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children></VBox>
-         </children>
-      </Pane>
    </children>
 </AnchorPane>

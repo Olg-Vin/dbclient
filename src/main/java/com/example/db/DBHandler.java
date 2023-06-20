@@ -39,40 +39,7 @@ public class DBHandler {
         }
         return connection;
     }
-// функция для получения данных из таблицы "hall"
-    public ResultSet getInfo(String getInfo){
-        PreparedStatement ps = null;
-        try {
-            ps = getConnection().prepareStatement(getInfo);
-            rs = ps.executeQuery();
-//            while (rs.next()) {  // пока есть данные
-//                System.out.println(rs.getString("full_name"));   // вывести значение атрибута, заданного по имени
-//            }
-            connection.close();
-            System.out.println("connection close");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return rs;
+    public void ConnectionClose() throws SQLException {
+        connection.close();
     }
-
-    public void insertInfo(Hall hall){
-        String insert = "INSERT INTO hall VALUES (?,?,?)";
-        PreparedStatement ps = null;
-        try {
-            ps = getConnection().prepareStatement(insert);
-            ps.setString(1, hall.getHall_name());
-            ps.setInt(2, hall.getCount_of_items());
-            ps.setString(3, hall.getTheme());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    /*public static void main(String[] args) {
-        DBHandler dbHandler = new DBHandler();
-        dbHandler.getTestConnection();
-    }*/
 }
