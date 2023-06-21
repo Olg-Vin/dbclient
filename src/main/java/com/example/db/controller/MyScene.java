@@ -55,6 +55,7 @@ public class MyScene implements Initializable {
 //    public Object selectedItem = table.getSelectionModel().getSelectedItem();
     public static boolean buttonFlag;
     public static boolean joinFlag = false;
+    public Button buttonConnect;
 
     DBHandler dbHandler = new DBHandler();
     DBQuery dbQuery = new DBQuery();
@@ -415,6 +416,9 @@ public class MyScene implements Initializable {
                     "-fx-background-color: white;");
             joinFlag=false;}
         else {joinFlag=true;}
+    }
+
+    public void getConnectedTables(ActionEvent actionEvent) {
     }
 }
 

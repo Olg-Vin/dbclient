@@ -78,11 +78,11 @@
                               <Insets left="10.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <CheckBox fx:id="joinId" mnemonicParsing="false" onAction="#joinMode" prefHeight="17.0" prefWidth="70.0" text="Связать" textFill="#000cff">
+                        <Button fx:id="buttonConnect" mnemonicParsing="false" onAction="#getConnectedTables" text="Связанное">
                            <HBox.margin>
-                              <Insets left="70.0" top="10.0" />
+                              <Insets left="85.0" top="5.0" />
                            </HBox.margin>
-                        </CheckBox>
+                        </Button>
                      </children></HBox>
                </center>
                <right>
