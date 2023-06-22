@@ -59,36 +59,36 @@ public class MyScene implements Initializable {
 
     DBHandler dbHandler = new DBHandler();
     DBQuery dbQuery = new DBQuery();
-    private int flag;
+    public static int flag;
     @FXML
     public void openAddScene(ActionEvent actionEvent) throws IOException {
         buttonFlag = false;
         switch (flag) {
-            case 1: addScene(actionEvent, "addHall.fxml");break;
-            case 2: addScene(actionEvent, "addEmployee.fxml");break;
-            case 3: addScene(actionEvent, "addExcursion.fxml");break;
-            case 4: addScene(actionEvent, "addFond.fxml");break;
-            case 5: addScene(actionEvent, "addMuseumItem.fxml");break;
-            case 6: addScene(actionEvent, "addSupport.fxml");break;
+            case 1 -> addScene(actionEvent, "addHall.fxml", "Добавить данные");
+            case 2 -> addScene(actionEvent, "addEmployee.fxml", "Добавить данные");
+            case 3 -> addScene(actionEvent, "addExcursion.fxml", "Добавить данные");
+            case 4 -> addScene(actionEvent, "addFond.fxml", "Добавить данные");
+            case 5 -> addScene(actionEvent, "addMuseumItem.fxml", "Добавить данные");
+            case 6 -> addScene(actionEvent, "addSupport.fxml", "Добавить данные");
         }
     }
     @FXML
     public void openEditScene(ActionEvent actionEvent) throws IOException {
         buttonFlag = true;
         switch (flag) {
-            case 1: addScene(actionEvent, "addHall.fxml");break;
-            case 2: addScene(actionEvent, "addEmployee.fxml");break;
-            case 3: addScene(actionEvent, "addExcursion.fxml");break;
-            case 4: addScene(actionEvent, "addFond.fxml");break;
-            case 5: addScene(actionEvent, "addMuseumItem.fxml");break;
-            case 6: addScene(actionEvent, "addSupport.fxml");break;
+            case 1: addScene(actionEvent, "addHall.fxml", "Изменить данные");break;
+            case 2: addScene(actionEvent, "addEmployee.fxml", "Изменить данные");break;
+            case 3: addScene(actionEvent, "addExcursion.fxml", "Изменить данные");break;
+            case 4: addScene(actionEvent, "addFond.fxml", "Изменить данные");break;
+            case 5: addScene(actionEvent, "addMuseumItem.fxml", "Изменить данные");break;
+            case 6: addScene(actionEvent, "addSupport.fxml", "Изменить данные");break;
         }
     }
-    private void addScene(ActionEvent actionEvent, String sceneSource) throws IOException {
+    private void addScene(ActionEvent actionEvent, String sceneSource, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource(sceneSource));
         Parent root = loader.load();
         Stage stage = new Stage();
-        stage.setTitle("данные");
+        stage.setTitle(title);
         stage.setScene(new Scene(root));
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
@@ -106,100 +106,30 @@ public class MyScene implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 //        createColumns();
         buttonHall.setOnAction(actionEvent -> {
-            String nameTable = "hall";
-            if(joinFlag) {
-                if (DBQuery.joinTables.contains(nameTable)) {
-                    buttonHall.setStyle(
-                            "-fx-background-color: white;");
-                    DBQuery.joinTables.remove(nameTable);
-                } else {
-                    buttonHall.setStyle(
-                            "-fx-background-color: blue;");
-                    DBQuery.joinTables.add(nameTable);
-                }
-            }else {
-                addDataFromHall();
-            setFlag(1);}
+//            buttonHall.setStyle(
+//                "-fx-background-color: white;");
+            addDataFromHall();
+            setFlag(1);
         });
         buttonEmployee.setOnAction(actionEvent -> {
-            String nameTable = "employee";
-            if(joinFlag) {
-                if (DBQuery.joinTables.contains(nameTable)) {
-                    buttonEmployee.setStyle(
-                            "-fx-background-color: white;");
-                    DBQuery.joinTables.remove(nameTable);
-                } else {
-                    buttonEmployee.setStyle(
-                            "-fx-background-color: blue;");
-                    DBQuery.joinTables.add(nameTable);
-                }
-            }else {
             setFlag(2);
-            addDataFromEmployee();}
+            addDataFromEmployee();
         });
         buttonExcursion.setOnAction(actionEvent -> {
-            String nameTable = "excursion";
-            if(joinFlag) {
-                if (DBQuery.joinTables.contains(nameTable)) {
-                    buttonExcursion.setStyle(
-                            "-fx-background-color: white;");
-                    DBQuery.joinTables.remove(nameTable);
-                } else {
-                    buttonExcursion.setStyle(
-                            "-fx-background-color: blue;");
-                    DBQuery.joinTables.add(nameTable);
-                }
-            }else {
             setFlag(3);
-            addDataFromExcursion();}
+            addDataFromExcursion();
         });
         buttonFond.setOnAction(actionEvent -> {
-            String nameTable = "fond";
-            if(joinFlag) {
-                if (DBQuery.joinTables.contains(nameTable)) {
-                    buttonFond.setStyle(
-                            "-fx-background-color: white;");
-                    DBQuery.joinTables.remove(nameTable);
-                } else {
-                    buttonFond.setStyle(
-                            "-fx-background-color: blue;");
-                    DBQuery.joinTables.add(nameTable);
-                }
-            }else {
             setFlag(4);
-            addDataFromFond();}
+            addDataFromFond();
         });
         buttonItem.setOnAction(actionEvent -> {
-            String nameTable = "museum_item";
-            if(joinFlag) {
-                if (DBQuery.joinTables.contains(nameTable)) {
-                    buttonItem.setStyle(
-                            "-fx-background-color: white;");
-                    DBQuery.joinTables.remove(nameTable);
-                } else {
-                    buttonItem.setStyle(
-                            "-fx-background-color: blue;");
-                    DBQuery.joinTables.add(nameTable);
-                }
-            }else {
             setFlag(5);
-            addDataFromMuseumItem();}
+            addDataFromMuseumItem();
         });
         buttonSupport.setOnAction(actionEvent -> {
-            String nameTable = "support";
-            if(joinFlag) {
-                if (DBQuery.joinTables.contains(nameTable)) {
-                    buttonSupport.setStyle(
-                            "-fx-background-color: white;");
-                    DBQuery.joinTables.remove(nameTable);
-                } else {
-                    buttonSupport.setStyle(
-                            "-fx-background-color: blue;");
-                    DBQuery.joinTables.add(nameTable);
-                }
-            }else {
             setFlag(6);
-            addDataFromSupport();}
+            addDataFromSupport();
         });
         buttonDelete.setOnAction(actionEvent -> {
             Object selectedItem = table.getSelectionModel().getSelectedItem();
@@ -369,16 +299,13 @@ public class MyScene implements Initializable {
         System.out.println("row was choose");
         Object selected = table.getSelectionModel().getSelectedItem();
         System.out.println("selected obj = " + selected.toString());
-        if (selected != null) {
-            switch (flag){
-                case 1: AddHall addHall = new AddHall((Hall) selected); break;
-                case 2: AddEmployee addEmployee = new AddEmployee((Employee) selected); break;
-                case 3: AddExcursion addExcursion = new AddExcursion((Excursion) selected); break;
-                case 4: AddFond addFond = new AddFond((Fond) selected); break;
-                case 5: AddMuseumItem museumItem = new AddMuseumItem((MuseumItem) selected);
-                    System.out.println("choose row = " + selected);break;
-                case 6: AddSupport addSupport = new AddSupport((Support) selected); break;
-            }
+        switch (flag){
+            case 1: AddHall addHall = new AddHall((Hall) selected); break;
+            case 2: AddEmployee addEmployee = new AddEmployee((Employee) selected); break;
+            case 3: AddExcursion addExcursion = new AddExcursion((Excursion) selected); break;
+            case 4: AddFond addFond = new AddFond((Fond) selected); break;
+            case 5: AddMuseumItem museumItem = new AddMuseumItem((MuseumItem) selected);break;
+            case 6: AddSupport addSupport = new AddSupport((Support) selected); break;
         }
     }
     private static List<Integer> tables = new ArrayList<>();
@@ -397,28 +324,11 @@ public class MyScene implements Initializable {
         }
         table.getColumns().addAll(columns);
     }
-    public void joinMode(ActionEvent actionEvent) {
-        if (joinFlag){
-            DBQuery.joinTables.clear();
-            table.getColumns().clear();
-            data.clear();
-            buttonHall.setStyle(
-                    "-fx-background-color: white;");
-            buttonExcursion.setStyle(
-                    "-fx-background-color: white;");
-            buttonEmployee.setStyle(
-                    "-fx-background-color: white;");
-            buttonSupport.setStyle(
-                    "-fx-background-color: white;");
-            buttonFond.setStyle(
-                    "-fx-background-color: white;");
-            buttonItem.setStyle(
-                    "-fx-background-color: white;");
-            joinFlag=false;}
-        else {joinFlag=true;}
-    }
 
-    public void getConnectedTables(ActionEvent actionEvent) {
+//buttonHall.setStyle(
+//        "-fx-background-color: white;");
+    public void getConnectedTables(ActionEvent actionEvent) throws IOException {
+        addScene(actionEvent, "Connect.fxml", "Связанные таблицы");
     }
 }
 

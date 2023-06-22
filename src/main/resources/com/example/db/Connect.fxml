@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.db.controller.Connect">
+    <children>
+        <Pane fx:id="popupEmployee" prefHeight="406.0" prefWidth="350.0" visible="false">
+            <children>
+                <VBox layoutY="-4.0" prefHeight="413.0" prefWidth="350.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets top="70.0" />
+                    </padding>
+               <children>
+                  <Button fx:id="employeeToHall" mnemonicParsing="false" onAction="#employeeToHall" prefHeight="45.0" prefWidth="150.0" text="Зал">
+                     <VBox.margin>
+                        <Insets left="100.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="employeeToExcursion" mnemonicParsing="false" onAction="#employeeToExcursion" prefHeight="45.0" prefWidth="150.0" text="Экскурсия">
+                     <VBox.margin>
+                        <Insets left="100.0" top="40.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="employeeToFond" mnemonicParsing="false" onAction="#employeeToFond" prefHeight="45.0" prefWidth="150.0" text="Фонд">
+                     <VBox.margin>
+                        <Insets left="100.0" top="40.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+                </VBox>
+            </children>
+        </Pane>
+
+        <Pane fx:id="popupHall" prefHeight="406.0" prefWidth="350.0" visible="false">
+            <children>
+                <VBox layoutY="-4.0" prefHeight="413.0" prefWidth="350.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets top="70.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="hallToEmployee" mnemonicParsing="false" onAction="#employeeToHall" prefHeight="45.0" prefWidth="150.0" text="Сотрудник">
+                            <VBox.margin>
+                                <Insets left="100.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="hallToExcursion" mnemonicParsing="false" onAction="#hallToExcursion" prefHeight="45.0" prefWidth="150.0" text="Экскурсия">
+                            <VBox.margin>
+                                <Insets left="100.0" top="40.0" />
+                            </VBox.margin>
+                        </Button>
+                  <Button fx:id="hallToExcursion1" layoutX="110.0" layoutY="165.0" mnemonicParsing="false" onAction="#hallToItem" prefHeight="45.0" prefWidth="150.0" text="Музейный предмет">
+                     <VBox.margin>
+                        <Insets left="100.0" top="40.0" />
+                     </VBox.margin>
+                  </Button>
+                    </children>
+                </VBox>
+            </children>
+        </Pane>
+
+        <Pane fx:id="popupExcursion" prefHeight="406.0" prefWidth="350.0" visible="false">
+            <children>
+                <VBox layoutY="-4.0" prefHeight="413.0" prefWidth="350.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets top="70.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="excursionToHall" mnemonicParsing="false" onAction="#hallToExcursion" prefHeight="45.0" prefWidth="150.0" text="Зал">
+                            <VBox.margin>
+                                <Insets left="100.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="excursionToEmployee" mnemonicParsing="false" onAction="#employeeToExcursion" prefHeight="45.0" prefWidth="150.0" text="Сотрудник">
+                            <VBox.margin>
+                                <Insets left="100.0" top="40.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </Pane>
+
+        <Pane fx:id="popupFond" prefHeight="406.0" prefWidth="350.0" visible="false">
+            <children>
+                <VBox layoutY="-4.0" prefHeight="413.0" prefWidth="350.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets top="70.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="fondToEmployee" mnemonicParsing="false" onAction="#fondToItem" prefHeight="45.0" prefWidth="150.0" text="Музейный предмет">
+                            <VBox.margin>
+                                <Insets left="100.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="fondToMuseumItem" mnemonicParsing="false" onAction="#employeeToFond" prefHeight="45.0" prefWidth="150.0" text="Сотрудник">
+                            <VBox.margin>
+                                <Insets left="100.0" top="40.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="fondToSupport" mnemonicParsing="false" onAction="#fondToSupport" prefHeight="45.0" prefWidth="150.0" text="Вспомогательный предмет" textAlignment="CENTER" wrapText="true">
+                            <VBox.margin>
+                                <Insets left="100.0" top="40.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </Pane>
+
+        <Pane fx:id="popupMuseumItem" prefHeight="406.0" prefWidth="350.0" visible="false">
+            <children>
+                <VBox layoutY="-4.0" prefHeight="413.0" prefWidth="350.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets top="70.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="itemToHall" mnemonicParsing="false" onAction="#hallToItem" prefHeight="45.0" prefWidth="150.0" text="Зал">
+                            <VBox.margin>
+                                <Insets left="100.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="itemToFond" mnemonicParsing="false" onAction="#itemToSupport" prefHeight="45.0" prefWidth="150.0" text="Вспомогательный предмет" textAlignment="CENTER" wrapText="true">
+                            <VBox.margin>
+                                <Insets left="100.0" top="40.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="itemToSupport" mnemonicParsing="false" onAction="#fondToItem" prefHeight="45.0" prefWidth="150.0" text="Фонд">
+                            <VBox.margin>
+                                <Insets left="100.0" top="40.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </Pane>
+
+        <Pane fx:id="popupSupport" prefHeight="406.0" prefWidth="350.0" visible="false">
+            <children>
+                <VBox layoutY="-4.0" prefHeight="413.0" prefWidth="350.0" style="-fx-background-color: #3CB371; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets top="70.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="supportToHall" mnemonicParsing="false" onAction="#fondToSupport" prefHeight="45.0" prefWidth="150.0" text="Фонд">
+                            <VBox.margin>
+                                <Insets left="100.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="supportToFond" mnemonicParsing="false" onAction="#itemToSupport" prefHeight="45.0" prefWidth="150.0" text="Музейный предмет">
+                            <VBox.margin>
+                                <Insets left="100.0" top="40.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
